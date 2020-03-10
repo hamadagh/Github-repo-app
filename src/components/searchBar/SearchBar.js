@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { TextField, InputAdornment, makeStyles } from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
+import Alert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
+
+
 
 
 const useStyles = makeStyles({
@@ -14,14 +18,30 @@ const useStyles = makeStyles({
 const SearchBar = () => {
     const classes = useStyles();
     const [inputValue, setInputValue] = useState();
+    const [inputArray, setInputArray] = useState("");
+    const [open, setOpen] = React.useState(false);
+
+    const openErrorMessage = () => {
+        setOpen(true);
+    };
+    const closeErrorMessage = () => {
+        setOpen(false);
+    };
     const handleChange = (e) => {
         setInputValue(`${e.target.value}`)
     }
     const searchClick = (e) => {
         e.preventDefault();
+        let re = /(?:.+)(?:\/)(?:.+)/;
+        if (re.test(inputValue)) {
+            setInputArray(inputValue.split("/"));
+        }
+        else {
+            openErrorMessage();
+        }
 
-        console.log("submitted")
-        console.log(inputValue)
+
+
     }
     return (
 
@@ -35,10 +55,16 @@ const SearchBar = () => {
                 margin="normal"
                 variant="outlined"
                 onChange={handleChange}
+                pattern="/.*(?:\/.*)/g"
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position='end'>
                             <SearchIcon data-testid="search-icon" onClick={searchClick} />
+                            <Snackbar open={open} autoHideDuration={6000} onClose={closeErrorMessage}>
+                                <Alert onClose={closeErrorMessage} variant="filled" severity="error">
+                                    Make sure to have a '/' in between eg(nuwave/lighthouse)
+                                </Alert>
+                            </Snackbar>
                         </InputAdornment>
                     ),
                     "data-testid": "text-field",
