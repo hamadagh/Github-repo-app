@@ -15,11 +15,12 @@ const useStyles = makeStyles({
 });
 
 
-const SearchBar = () => {
+const SearchBar = ({ handleSearchTerm }) => {
     const classes = useStyles();
+
     const [inputValue, setInputValue] = useState();
-    const [inputArray, setInputArray] = useState("");
     const [open, setOpen] = React.useState(false);
+
 
     const openErrorMessage = () => {
         setOpen(true);
@@ -27,6 +28,10 @@ const SearchBar = () => {
     const closeErrorMessage = () => {
         setOpen(false);
     };
+
+
+
+
     const handleChange = (e) => {
         setInputValue(`${e.target.value}`)
     }
@@ -34,7 +39,7 @@ const SearchBar = () => {
         e.preventDefault();
         let re = /(?:.+)(?:\/)(?:.+)/;
         if (re.test(inputValue)) {
-            setInputArray(inputValue.split("/"));
+            handleSearchTerm(inputValue.split("/"));
         }
         else {
             openErrorMessage();
@@ -50,6 +55,7 @@ const SearchBar = () => {
 
                 id="outlined"
                 className={classes.input}
+                type="search"
                 label="Username / Repo name"
                 placeholder="Make sure to put ' / ' in between"
                 margin="normal"

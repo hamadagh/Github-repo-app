@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/header/Header';
 import SearchBar from './components/searchBar/SearchBar';
 import RepoDetails from './components/repoDetails/RepoDetails';
@@ -10,12 +10,19 @@ import client from './client';
 import './App.css';
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchTerm = (value) => {
+    setSearchTerm(() => value);
+    console.log(searchTerm);
+  }
+
   return (
     <ApolloProvider client={client}>
       <div className="App">
         <Header />
-        <SearchBar />
-        <RepoDetails />
+        <SearchBar handleSearchTerm={handleSearchTerm} />
+        <RepoDetails searchTerm={searchTerm} />
       </div>
     </ApolloProvider>
 
