@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
 import { Typography, makeStyles } from "@material-ui/core";
 import { lightBlue } from '@material-ui/core/colors';
-
+import { useQuery } from "@apollo/react-hooks";
+import { GET_REPOS } from '../../queries';
 
 
 const useStyles = makeStyles({
@@ -18,6 +19,11 @@ const useStyles = makeStyles({
 });
 function RepoDetails(props) {
     const classes = useStyles();
+    const owner = props.searchTerm[0];
+    const name = props.searchTerm[1];
+    const { data, loading, error } = useQuery(GET_REPOS,
+        { variables: { name: { name }, owner: { owner } } }
+    );
     useEffect(() => {
         console.log(props.searchTerm)
     })
