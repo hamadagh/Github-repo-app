@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const GET_REPOS = gql`
+export const GET_REPO = gql`
 query($name: String!, $owner: String!) {
         repository(name: $name, owner: $owner) {
            openIssues: issues(first: 10, states: OPEN) {

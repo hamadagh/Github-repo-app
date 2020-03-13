@@ -10,19 +10,24 @@ import client from './client';
 import './App.css';
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchRepo, setSearchRepo] = useState();
+  const [searchUser, setSearchUser] = useState();
+
 
   const handleSearchTerm = (value) => {
-    setSearchTerm(() => value);
-    console.log(searchTerm);
+    setSearchUser(() => value[0]);
+    setSearchRepo(() => value[1]);
+    console.log(searchRepo);
+    console.log(searchUser);
   }
+
 
   return (
     <ApolloProvider client={client}>
       <div className="App">
         <Header />
         <SearchBar handleSearchTerm={handleSearchTerm} />
-        <RepoDetails searchTerm={searchTerm} />
+        <RepoDetails user={searchUser} repo={searchRepo} />
       </div>
     </ApolloProvider>
 

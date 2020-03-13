@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
 import { Typography, makeStyles } from "@material-ui/core";
 import { lightBlue } from '@material-ui/core/colors';
 import { useQuery } from "@apollo/react-hooks";
-import { GET_REPOS } from '../../queries';
+import { GET_REPO } from '../../queries';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import NavTabs from './NavTabs'
+
+
 
 
 const useStyles = makeStyles({
@@ -15,18 +19,48 @@ const useStyles = makeStyles({
         marginTop: '10rem',
         opacity: '0.2',
 
+    },
+    note: {
+        textAlign: 'center',
+    },
+    progress: {
+
+        textAlign: 'center',
+        marginTop: '350px',
+        '& > * + *': {
+            marginTop: '50px',
+        },
     }
 });
-function RepoDetails(props) {
+
+
+function RepoDetails({ user, repo }) {
     const classes = useStyles();
-    const owner = props.searchTerm[0];
-    const name = props.searchTerm[1];
-    const { data, loading, error } = useQuery(GET_REPOS,
-        { variables: { name: { name }, owner: { owner } } }
+
+
+
+
+    const { data, loading, error } = useQuery(GET_REPO,
+        { variables: { "name": repo, owner: user } }
     );
-    useEffect(() => {
-        console.log(props.searchTerm)
-    })
+    if (loading) return (
+        <div className={classes.progress}>
+            <CircularProgress disableShrink />
+        </div>
+
+    );
+
+    if (data) {
+        console.log(data)
+        return (
+            <NavTabs data={data} />
+        )
+    }
+
+
+
+
+
     return (
         <div className="Repo-details">
             <FolderOutlinedIcon style={{ fontSize: 180, color: lightBlue[100] }} className={classes.icon} />
@@ -39,6 +73,6 @@ function RepoDetails(props) {
     </Typography>
         </div>
     );
-}
 
+}
 export default RepoDetails;
