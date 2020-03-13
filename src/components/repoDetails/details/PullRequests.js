@@ -1,12 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
 
 
 const useStyles = makeStyles(theme => ({
-    root: {
+    paper: {
         display: 'flex',
         flexWrap: 'wrap',
+        marginBottom: '10px',
         '& > *': {
             margin: theme.spacing(1),
             width: '100%',
@@ -15,24 +18,25 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function PullRequests() {
+function PullRequests(data) {
     const classes = useStyles();
 
 
     return (
-        <div className={classes.root}>
-            <Paper elevation={2} />
-            <Paper elevation={2} />
-            <Paper elevation={2} />
-            <Paper elevation={2} />
-            <Paper elevation={2} />
-            <Paper elevation={3} />
-            <Paper elevation={3} />
-            <Paper elevation={3} />
-            <Paper elevation={3} />
-            <Paper elevation={3} />
+        <div>
+            {
+                data.data.nodes.map((data, index) =>
+                    <Paper children={<Typography>{data.title}</Typography>} className={classes.paper} elevation={3} key={index} />
+                )
+            }
         </div>
-    );
+
+
+    )
+
+
+
+
 }
 
 export default PullRequests;

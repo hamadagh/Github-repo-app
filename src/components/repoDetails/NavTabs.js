@@ -59,10 +59,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function NavTabs() {
+export default function NavTabs(data) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-
+    console.log(data);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -82,13 +82,13 @@ export default function NavTabs() {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                <PullRequests />
+                <PullRequests data={data.data.repository.pullRequests} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <OpenedIssues />
+                <OpenedIssues data={data.data.repository.openIssues} />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <ClosedIssues />
+                <ClosedIssues data={data.data.repository.closedIssues} />
             </TabPanel>
         </div>
     );
