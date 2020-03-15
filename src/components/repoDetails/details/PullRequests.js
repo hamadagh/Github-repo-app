@@ -45,19 +45,11 @@ const ExpansionPanelSummary = withStyles({
 })(MuiExpansionPanelSummary);
 
 const useStyles = makeStyles(theme => ({
-    paper: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        marginBottom: '10px',
-        '& > *': {
-            margin: theme.spacing(1),
-            width: '100%',
-            height: theme.spacing(16),
-        },
-    },
+
     root: {
         display: 'flex',
         flexWrap: 'wrap',
+
         width: '100%',
         '& > *': {
             margin: theme.spacing(1),
@@ -78,7 +70,7 @@ function PullRequests(data) {
                     <Button color="primary" key={index} className={classes.root}>
                         <ExpansionPanel square >
                             <ExpansionPanelSummary aria-controls="panel1d-content" id="panel2d-header">
-                                <Typography>{data.title}</Typography>
+                                <Typography className={classes.typography}>{data.title}</Typography>
                             </ExpansionPanelSummary>
                         </ExpansionPanel>
                     </Button>
