@@ -71,7 +71,8 @@ const useStyles = makeStyles(theme => ({
         height: '100%',
         textAlign: 'center',
 
-    }
+    },
+
 }));
 
 function OpenedIssues(data) {
@@ -97,7 +98,7 @@ function OpenedIssues(data) {
                                 <Typography>
                                     {data.body}
                                 </Typography>
-                                <div>
+                                <div className="comments">
                                     <Comments data={data.comments} />
                                 </div>
                             </ExpansionPanelDetails>
