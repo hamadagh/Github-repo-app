@@ -6,7 +6,6 @@ import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Comments from './Comments';
-
 import Button from '@material-ui/core/Button';
 
 const ExpansionPanel = withStyles({
