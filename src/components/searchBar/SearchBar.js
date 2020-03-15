@@ -11,6 +11,10 @@ const useStyles = makeStyles({
     input: {
         width: '100%',
     },
+    icon: {
+        cursor: 'pointer',
+    },
+
 
 });
 
@@ -55,7 +59,7 @@ const SearchBar = ({ handleSearchTerm }) => {
 
                 id="outlined"
                 className={classes.input}
-                type="search"
+
                 label="Username / Repo name"
                 placeholder="Make sure to put ' / ' in between"
                 margin="normal"
@@ -65,9 +69,9 @@ const SearchBar = ({ handleSearchTerm }) => {
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position='end'>
-                            <SearchIcon data-testid="search-icon" onClick={searchClick} />
+                            <SearchIcon className={classes.icon} data-testid="search-icon" onClick={searchClick} />
                             <Snackbar open={open} autoHideDuration={6000} onClose={closeErrorMessage}>
-                                <Alert onClose={closeErrorMessage} variant="filled" severity="error">
+                                <Alert className={classes.alert} onClose={closeErrorMessage} variant="filled" severity="error">
                                     Make sure to have a '/' in between eg(nuwave/lighthouse)
                                 </Alert>
                             </Snackbar>
