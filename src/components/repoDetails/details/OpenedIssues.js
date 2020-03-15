@@ -1,11 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Comments from './Comments';
 
 import Button from '@material-ui/core/Button';
 
@@ -98,12 +98,7 @@ function OpenedIssues(data) {
                                     {data.body}
                                 </Typography>
                                 <div>
-                                    <h3>Comments</h3>
-                                    {
-                                        data.comments.nodes.map((comments, index) =>
-                                            <Paper children={<Typography>{comments.bodyText}</Typography>} />
-                                        )
-                                    }
+                                    <Comments data={data.comments} />
                                 </div>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
