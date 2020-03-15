@@ -51,6 +51,8 @@ const ExpansionPanelDetails = withStyles(theme => ({
         padding: theme.spacing(2),
         marginBottom: '10px',
         height: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
     },
 }))(MuiExpansionPanelDetails);
 const useStyles = makeStyles(theme => ({
@@ -65,7 +67,7 @@ const useStyles = makeStyles(theme => ({
         },
     },
     paper: {
-        width: '100%',
+        width: '70%',
         height: '100%',
         textAlign: 'center',
 
@@ -95,6 +97,14 @@ function OpenedIssues(data) {
                                 <Typography>
                                     {data.body}
                                 </Typography>
+                                <div>
+                                    <h3>Comments</h3>
+                                    {
+                                        data.comments.nodes.map((comments, index) =>
+                                            <Paper children={<Typography>{comments.bodyText}</Typography>} />
+                                        )
+                                    }
+                                </div>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
                     </Button>
